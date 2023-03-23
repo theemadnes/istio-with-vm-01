@@ -28,6 +28,8 @@ kubectl -n whereami apply -k kubernetes-engine-samples/whereami/k8s
 kubectl apply -f whereami-gateway.yaml
 kubectl apply -f whereami-vs.yaml 
 
+#### edit the whereami service to change from Service: LB to Service: ClusterIP (did this manually for now)
+
 $ curl --header "Host: whereami.example.com" http://35.239.31.157
 {
   "cluster_name": "istio-test-01",
@@ -151,8 +153,6 @@ sudo chown -R istio-proxy /var/lib/istio /etc/certs /etc/istio/proxy /etc/istio/
 sudo systemctl start istio
 
 
-### problem - VM can't talk to external LBs 
-### also cleaned up whereami SVC to make it ClusterIP
 
 ### from workstation
 kubectl apply -f destination_rule.yaml

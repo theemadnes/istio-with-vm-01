@@ -1,0 +1,25 @@
+defaultConfig:
+  discoveryAddress: istiod.istio-system.svc:15012
+  meshId: mesh1
+  proxyMetadata:
+    CANONICAL_REVISION: latest
+    CANONICAL_SERVICE: whereami-vm
+    ISTIO_META_AUTO_REGISTER_GROUP: whereami-vm
+    ISTIO_META_CLUSTER_ID: Kubernetes
+    ISTIO_META_DNS_CAPTURE: "true"
+    ISTIO_META_MESH_ID: mesh1
+    ISTIO_META_NETWORK: ""
+    ISTIO_META_WORKLOAD_NAME: whereami-vm
+    ISTIO_METAJSON_LABELS: '{"app":"whereami-vm","service.istio.io/canonical-name":"whereami-vm","service.istio.io/canonical-revision":"latest"}'
+    POD_NAMESPACE: whereami-vm
+    SERVICE_ACCOUNT: whereami-vm
+    TRUST_DOMAIN: cluster.local
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 1
+    periodSeconds: 5
+  tracing:
+    zipkin:
+      address: zipkin.istio-system:9411

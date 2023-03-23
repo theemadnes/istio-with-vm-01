@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadGroup
+metadata:
+  name: "whereami-vm"
+  namespace: "whereami-vm"
+spec:
+  metadata:
+    labels:
+      app: "whereami-vm"
+  template:
+    serviceAccount: "whereami-vm"
+    network: ""
+  probe:
+    periodSeconds: 5
+    initialDelaySeconds: 1
+    httpGet:
+      port: 8080
+      path: /healthz
